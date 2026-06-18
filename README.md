@@ -8,6 +8,12 @@
 
 https://xuyudong.github.io/kafka-simulator/
 
+## 界面预览
+
+![Kafka Simulator 图形化学习界面](./example/img-example-1.png)
+
+这个界面把 Kafka 的核心对象画成可以拖拽和连线的卡片：`Producer` 写入 `Topic`，`Topic` 按 `Partition` 保存消息，`Consumer Group` 将 `Partition` 分配给不同 `Consumer`，底部活动日志会打印生产和消费的消息数据。
+
 ## 适合谁
 
 - 刚开始学习 Kafka 的同学
