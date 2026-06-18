@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kafka 消息中间件模拟器</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>Kafka 消息中间件模拟器</h1>
+          <p>在浏览器里练习 Producer 写入、Topic Partition、Consumer 拉取、提交 Offset、Rebalance 和消息回放。</p>
+        </div>
+        <div class="topbar-actions">
+          <select id="scenarioSelect" aria-label="学习场景"></select>
+          <button id="loadScenarioBtn" type="button">加载场景</button>
+          <button id="saveBtn" type="button">保存</button>
+          <button id="loadSavedBtn" type="button">读取保存</button>
+          <button id="exportBtn" type="button">导出 JSON</button>
+          <button id="importBtn" type="button">导入 JSON</button>
+          <button id="resetBtn" type="button" class="danger">重置</button>
+        </div>
+      </header>
+
+      <main class="workbench">
+        <aside class="toolbox" aria-label="工具箱">
+          <div class="panel-title">工具箱</div>
+          <button class="tool-item producer" type="button" draggable="true" data-type="producer">
+            <span>P</span>
+            Producer
+          </button>
+          <button class="tool-item topic" type="button" draggable="true" data-type="topic">
+            <span>T</span>
+            Topic
+          </button>
+          <button class="tool-item group" type="button" draggable="true" data-type="group">
+            <span>G</span>
+            Consumer Group
+          </button>
+          <button class="tool-item consumer" type="button" draggable="true" data-type="consumer">
+            <span>C</span>
+            Consumer
+          </button>
+          <button class="tool-item broker" type="button" draggable="true" data-type="broker">
+            <span>B</span>
+            Broker/集群
+          </button>
+        </aside>
+
+        <section class="canvas-panel">
+          <div id="canvas" class="canvas" aria-label="Kafka 拓扑画布">
+            <svg id="edgeLayer" class="edge-layer" aria-hidden="true">
+              <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                  <path d="M 0 0 L 8 4 L 0 8 z"></path>
+                </marker>
+              </defs>
+            </svg>
+            <div id="nodeLayer" class="node-layer"></div>
+            <div id="flowLayer" class="flow-layer" aria-hidden="true"></div>
+          </div>
+          <div class="zoom-controls" aria-label="画布缩放">
+            <button id="zoomOutBtn" type="button" title="缩小画布">-</button>
+            <span id="zoomLabel">100%</span>
+            <button id="zoomInBtn" type="button" title="放大画布">+</button>
+            <button id="zoomResetBtn" type="button">重置</button>
+          </div>
+        </section>
+
+        <aside id="properties" class="properties" aria-label="属性面板"></aside>
+      </main>
+
+      <section class="log-panel" aria-label="活动日志">
+        <div class="log-header">
+          <h2>活动日志</h2>
+          <button id="clearLogBtn" type="button">清空</button>
+        </div>
+        <div id="eventLog" class="event-log"></div>
+      </section>
+    </div>
+
+    <div id="jsonModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="jsonModalTitle">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2 id="jsonModalTitle">场景 JSON</h2>
+          <button id="closeModalBtn" type="button">关闭</button>
+        </div>
+        <textarea id="jsonText" spellcheck="false"></textarea>
+        <div class="modal-actions">
+          <button id="copyJsonBtn" type="button">复制</button>
+          <button id="applyJsonBtn" type="button">应用导入</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
